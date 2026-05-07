@@ -1,0 +1,318 @@
+:root {
+    --bg-color: #0b0f19;
+    --panel-bg: rgba(20, 27, 45, 0.65);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+    --receipt-bg: #ffffff;
+    --receipt-text: #1e293b;
+    --receipt-muted: #64748b;
+    --receipt-border: #e2e8f0;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.15), transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.15), transparent 25%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.app-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1100px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.form-section h2 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.input-group input[readonly] {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.input-group input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    cursor: pointer;
+}
+
+button {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.primary-btn {
+    background: var(--accent-gradient);
+    color: white;
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+}
+
+.primary-btn:active {
+    transform: translateY(0);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Receipt Styling */
+.preview-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+}
+
+.receipt-wrapper {
+    background: var(--receipt-bg);
+    color: var(--receipt-text);
+    width: 100%;
+    max-width: 400px;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transform: rotateY(-5deg) rotateX(5deg);
+    transition: transform 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.receipt-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--accent-gradient);
+}
+
+.preview-section:hover .receipt-wrapper {
+    transform: rotateY(0) rotateX(0);
+}
+
+.receipt-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.receipt-header .logo {
+    width: 48px;
+    height: 48px;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+}
+
+.receipt-header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--receipt-text);
+}
+
+.receipt-divider {
+    height: 1px;
+    background: var(--receipt-border);
+    margin: 1.5rem 0;
+}
+
+.receipt-divider.dashed {
+    background: transparent;
+    border-top: 2px dashed var(--receipt-border);
+}
+
+.receipt-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.receipt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.receipt-row .label {
+    color: var(--receipt-muted);
+    font-size: 0.95rem;
+}
+
+.receipt-row .value {
+    font-weight: 500;
+    color: var(--receipt-text);
+    text-align: right;
+    max-width: 60%;
+    word-break: break-word;
+}
+
+.total-row {
+    margin-top: 0.5rem;
+}
+
+.total-row .label {
+    font-size: 1.1rem;
+    color: var(--receipt-text);
+    font-weight: 600;
+}
+
+.total-row .value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.receipt-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+}
+
+.thank-you {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--receipt-text);
+    margin-bottom: 0.5rem;
+    font-style: italic;
+}
+
+.footer-note {
+    font-size: 0.8rem;
+    color: var(--receipt-muted);
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .form-section {
+        display: none;
+    }
+    
+    .preview-section {
+        background: none;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    .receipt-wrapper {
+        transform: none;
+        box-shadow: none;
+        max-width: 100%;
+        margin: 0;
+        padding: 2rem;
+    }
+    
+    .app-container {
+        display: block;
+    }
+}

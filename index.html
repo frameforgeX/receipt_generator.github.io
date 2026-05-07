@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Receipt Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Form Section -->
+        <div class="form-section panel glass">
+            <h2>Receipt Details</h2>
+            <p class="subtitle">Fill in the details to generate your receipt</p>
+            
+            <form id="receipt-form">
+                <div class="input-group">
+                    <label for="payment-id">Payment ID (Auto-generated)</label>
+                    <input type="text" id="payment-id" readonly>
+                </div>
+                
+                <div class="input-group">
+                    <label for="payment-time">Payment Time</label>
+                    <input type="datetime-local" id="payment-time" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="payment-method">Payment Method</label>
+                    <select id="payment-method">
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="Bank Transfer">Bank Transfer</option>
+                        <option value="PayPal">PayPal</option>
+                        <option value="Crypto">Crypto</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+                
+                <div class="input-group">
+                    <label for="amount-sent">Amount Sent ($)</label>
+                    <input type="number" id="amount-sent" step="0.01" min="0" placeholder="e.g. 150.00" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="sender-name">Sender Name</label>
+                    <input type="text" id="sender-name" placeholder="John Doe" required>
+                </div>
+                
+                <button type="button" id="generate-btn" class="primary-btn">Generate New Receipt</button>
+                <button type="button" id="print-btn" class="secondary-btn">Print / Save as PDF</button>
+            </form>
+        </div>
+
+        <!-- Receipt Preview Section -->
+        <div class="preview-section panel glass">
+            <div class="receipt-wrapper" id="receipt-container">
+                <div class="receipt-header">
+                    <div class="logo">AC</div>
+                    <h1>AC Reciept</h1>
+                </div>
+                
+                <div class="receipt-divider"></div>
+                
+                <div class="receipt-body">
+                    <div class="receipt-row">
+                        <span class="label">Payment ID</span>
+                        <span class="value" id="out-payment-id">-</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Payment Time</span>
+                        <span class="value" id="out-payment-time">-</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Payment Method</span>
+                        <span class="value" id="out-payment-method">-</span>
+                    </div>
+                    <div class="receipt-row">
+                        <span class="label">Sender Name</span>
+                        <span class="value" id="out-sender-name">-</span>
+                    </div>
+                    
+                    <div class="receipt-divider dashed"></div>
+                    
+                    <div class="receipt-row total-row">
+                        <span class="label">Amount Sent</span>
+                        <span class="value" id="out-amount-sent">$0.00</span>
+                    </div>
+                </div>
+                
+                <div class="receipt-footer">
+                    <p class="thank-you">Thank You</p>
+                    <p class="footer-note">This is a generated electronic receipt.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
